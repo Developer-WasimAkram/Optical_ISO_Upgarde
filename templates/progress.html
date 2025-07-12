@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Automation Progress</title>
+  <meta http-equiv="refresh" content="5">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #007c92;
+      padding: 40px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      max-width: 1000px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .status {
+      font-weight: bold;
+    }
+
+    .waiting {
+      color: #999;
+    }
+
+    .running {
+      color: #f0ad4e;
+    }
+
+    .done {
+      color: #28a745;
+    }
+
+    .failed {
+      color: #dc3545;
+    }
+
+    .reason {
+      font-size: 0.9em;
+      color: #c0392b;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Automation Progress</h1>
+    <a href="{{ url_for('upload') }}">⬅ Back to Upload</a>
+    
+    <table>
+      <tr>
+        <th>Device</th>
+        <th>Status</th>
+        <th>Precheck</th>
+        <th>Upgrade</th>
+        <th>Postcheck</th>
+      </tr>
+      {% for device, status in device_status.items() %}
+      <tr>
+        <td>{{ device }}</td>
+        <td class="status">
+          {% if status.status == 'Connected' %}
+            <span class="done">✅ Connected</span>
+          {% elif status.status == 'Connecting' %}
+            <span class="running">🔄 Connecting</span>
+          {% elif status.status == 'Complete' %}
+            <span class="done">✅ Complete</span>
+          {% elif status.status.startswith('Failed') %}
+            <span class="failed">❌ {{ status.status }}</span>
+          {% else %}
+            <span class="waiting">⏳ {{ status.status }}</span>
+          {% endif %}
+        </td>
+
+        {% for stage in ['precheck', 'upgrade', 'postcheck'] %}
+        <td class="status">
+          {% if status[stage] == 'Waiting' %}
+            <span class="waiting">⏳ Waiting</span>
+          {% elif status[stage] == 'Running' %}
+            <span class="running">🔄 Running</span>
+          {% elif status[stage].endswith('.txt') %}
+            <span class="done">
+              ✅ <a href="{{ url_for('download', filename=status[stage]) }}" title="Download">⬇️</a> |
+              <a href="{{ url_for('view_output', filename=status[stage]) }}" title="View output">👁️</a>
+
+            </span>
+          {% elif 'Failed:' in status[stage] %}
+            <span class="failed">❌ Failed</span><br>
+            <div class="reason">{{ status[stage] }}</div>
+          {% else %}
+            <span class="failed">❌ Unknown</span>
+          {% endif %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+        
+    
+</body>
+</html>

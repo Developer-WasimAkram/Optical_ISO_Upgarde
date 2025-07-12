@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CX Automation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background:rgb(45, 110, 137);
+      padding: 40px;
+    }
+    .container {
+      background: #007c92;
+      padding: 30px;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+      color: #fff;
+    }
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CX Automation</h1>
+    <form method="POST" enctype="multipart/form-data">
+      <label>Username:</label>
+      <input type="text" name="username" required>
+
+      <label>Password:</label>
+      <input type="password" name="password" required>
+
+      <label>Device IP List File:</label>
+      <input type="file" name="device_ips_file" accept=".txt" required>
+
+      <label>Precheck Commands File:</label>
+      <input type="file" name="precheck_file" accept=".txt" required>
+
+      <label>Upgrade Commands File:</label>
+      <input type="file" name="upgrade_file" accept=".txt" required>
+
+      <label>Postcheck Commands File:</label>
+      <input type="file" name="postcheck_file" accept=".txt" required>
+
+      <button type="submit">Start Automation</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,565 @@
+Command: admin show install active summary 
+Output:
+
+Sat Jul 12 07:37:54.744 UTC
+     Active Packages: 2
+        ncs1004-sysadmin-7.7.1 version=7.7.1 [Boot image]
+        ncs1004-sysadmin-otn-xp-dp-7.7.1-r771
+
+
+Command: admin show install inactive summary 
+Output:
+
+Sat Jul 12 07:37:57.957 UTC
+     Inactive Packages: 2
+        ncs1004-sysadmin-7.1.1
+        host-7.1.1
+
+
+Command: admin show install committed summary 
+Output:
+
+Sat Jul 12 07:38:01.710 UTC
+     Committed Packages: 2
+        ncs1004-sysadmin-7.7.1 version=7.7.1 [Boot image]
+        ncs1004-sysadmin-otn-xp-dp-7.7.1-r771
+
+
+Command: admin show hw-module fpd 
+Output:
+
+Sat Jul 12 07:38:06.393 UTC
+                                                                     FPD Versions
+                                                                    ==============
+Location  Card type         HWver FPD device       ATR Status      Run     Programd
+-----------------------------------------------------------------------------------
+0/0       NCS1K4-1.2T-K9    2.0   LC_CPU_MOD_FW        CURRENT    77.10     77.10    
+0/0       NCS1K4-1.2T-K9    1.0   LC_OPT_MOD_FW        CURRENT     1.36      1.36    
+0/1       NCS1K4-1.2T-K9    3.0   LC_CPU_MOD_FW        CURRENT    77.10     77.10    
+0/1       NCS1K4-1.2T-K9    3.0   LC_OPT_MOD_FW        CURRENT     1.36      1.36    
+0/RP0     NCS1K4-CNTLR-K9   1.14  BIOS              S  CURRENT     5.80      5.80    
+0/RP0     NCS1K4-CNTLR-K9   5.4   BP_SSD               CURRENT    75.00     75.00    
+0/RP0     NCS1K4-CNTLR-K9   5.0   CPU_FPGA             CURRENT     1.14      1.14    
+0/RP0     NCS1K4-CNTLR-K9   5.4   CPU_SSD              CURRENT    75.00     75.00    
+0/RP0     NCS1K4-CNTLR-K9   3.18  POWMAN_CFG           CURRENT     3.40      3.40    
+0/PM0     NCS1K4-AC-PSU     0.1   PO-PriMCU            CURRENT     2.70      2.70    
+0/PM1     NCS1K4-AC-PSU     0.1   PO-PriMCU            CURRENT     2.70      2.70    
+0/SC0     NCS1004           2.0   BP_FPGA              CURRENT     1.25      1.25    
+0/SC0     NCS1004           2.0   XGE_FLASH            CURRENT    18.04     18.04    
+
+Command: show install active summary 
+Output:
+
+Sat Jul 12 07:38:09.826 UTC
+Label : 7.7.1
+
+    Active Packages: 4
+        ncs1004-xr-7.7.1 version=7.7.1 [Boot image]
+        ncs1004-mpls-te-rsvp-1.0.0.0-r771
+        ncs1004-k9sec-1.0.0.0-r771
+        ncs1004-mpls-1.0.0.0-r771
+
+
+Command: show install inactive summary 
+Output:
+
+Sat Jul 12 07:38:11.753 UTC
+4 inactive package(s) found:
+    ncs1004-k9sec-2.1.0.0-r711
+    ncs1004-mpls-2.0.0.0-r711
+    ncs1004-xr-7.1.1
+    ncs1004-mpls-te-rsvp-2.1.0.0-r711
+
+Command: show install committed summary 
+Output:
+
+Sat Jul 12 07:38:13.501 UTC
+Label : 7.7.1
+
+    Committed Packages: 4
+        ncs1004-xr-7.7.1 version=7.7.1 [Boot image]
+        ncs1004-mpls-te-rsvp-1.0.0.0-r771
+        ncs1004-k9sec-1.0.0.0-r771
+        ncs1004-mpls-1.0.0.0-r771
+
+
+Command: show running-config 
+Output:
+
+Sat Jul 12 07:38:15.000 UTC
+Building configuration...
+!! IOS XR Configuration 7.7.1
+!! Last configuration change at Thu May 22 11:29:36 2025 by admin
+!
+hostname NCS1K-SITE-B
+snmp-server traps alarm
+logging 10.104.153.77 vrf default severity info port default
+logging 10.104.153.84 vrf default severity info port default
+logging 10.106.41.211 vrf default severity info port default
+username admin
+ group root-lr
+ group cisco-support
+ secret 10 $6$pirew0vh8jfm9w0.$NfhOzOgor6uDj9Q9KAiTzA9SHvgRGdhLjPiOPYfpWTHKvAFU0nr3ITIRugN1hMNG7eHI9XVZFYh7LqyHoYUsN/
+!
+line default
+ exec-timeout 10 0
+ session-limit 10
+ session-timeout 100
+ transport input all
+ transport output all
+!
+vty-pool default 0 99 line-template default
+snmp-server ifindex persist
+snmp-server vrf default
+ host 10.104.153.77 traps version 3 noauth priv
+ host 10.104.153.77 traps version 3 priv snmp_admin
+ host 10.104.153.84 traps version 3 noauth priv
+ host 10.104.153.84 traps version 3 priv snmp_admin
+ host 10.106.41.211 traps version 3 noauth priv
+ host 10.106.41.211 traps version 3 priv snmp_admin
+!
+snmp-server host 8.8.9.98 traps version 2c test123
+snmp-server host 10.56.56.225 traps version 3 priv snmp_admin
+snmp-server host 10.64.80.172 traps public
+snmp-server host 10.64.80.221 traps version 3 priv snmp_admin
+snmp-server host 10.64.101.103 traps version 3 noauth public
+snmp-server host 10.64.101.105 traps version 3 priv snmp_admin
+snmp-server host 10.64.101.240 traps version 3 noauth public
+snmp-server host 10.78.12.114 traps version 3 noauth public
+snmp-server host 10.78.103.91 traps version 3 priv snmp_admin
+snmp-server host 10.78.103.93 traps version 3 priv snmp_admin
+snmp-server host 10.78.103.94 traps version 3 priv snmp_admin
+snmp-server host 10.81.87.166 traps version 3 priv snmp_admin
+snmp-server host 10.104.89.90 traps version 2c test123
+snmp-server host 10.104.124.18 traps version 3 priv snmp_admin
+snmp-server host 10.105.172.202 traps version 3 priv snmp_admin
+snmp-server host 10.105.172.240 traps version 3 priv snmp_admin
+snmp-server host 10.105.208.83 traps version 2c cisco
+snmp-server host 10.106.33.44 traps public
+snmp-server host 10.106.40.221 traps version 2c public
+snmp-server host 10.174.19.2 traps version 3 noauth public
+snmp-server host 10.230.211.2 traps version 3 noauth public
+snmp-server host 10.230.211.2 traps version 3 priv snmp_admin
+snmp-server host 172.20.48.54 traps version 3 priv snmp_admin
+snmp-server host 172.20.48.82 traps version 3 noauth public
+snmp-server user snmp_admin snmpv3_def v3 auth sha encrypted 15063B1B06397F01697E26711212020B priv aes 128 encrypted 0010231106485F234E6C5F1D190B0C01 SystemOwner
+snmp-server view view_def 1.3.6 included
+snmp-server view view_def 1.0.8802 included
+snmp-server community cisco RO
+snmp-server community write RW SystemOwner
+snmp-server community public RO SystemOwner
+snmp-server community private RW SystemOwner
+snmp-server group snmpv3_def v3 priv notify view_def read view_def write view_def
+snmp-server traps rf
+snmp-server traps ntp
+snmp-server traps otn
+snmp-server traps copy-complete
+snmp-server traps snmp linkup
+snmp-server traps snmp linkdown
+snmp-server traps snmp coldstart
+snmp-server traps snmp warmstart
+snmp-server traps snmp authentication
+snmp-server traps flash removal
+snmp-server traps flash insertion
+snmp-server traps power
+snmp-server traps sonet
+snmp-server traps config
+snmp-server traps entity
+snmp-server traps selective-vrf-download role-change
+snmp-server traps system
+snmp-server traps diameter peerup
+snmp-server traps diameter peerdown
+snmp-server traps diameter protocolerror
+snmp-server traps diameter permanentfail
+snmp-server traps diameter transientfail
+snmp-server traps fibrechannel
+snmp-server traps optical
+snmp-server traps cisco-entity-ext
+snmp-server traps entity-state operstatus
+snmp-server traps entity-state switchover
+snmp-server traps entity-redundancy all
+snmp-server traps entity-redundancy status
+snmp-server traps entity-redundancy switchover
+snmp-server logging threshold oid-processing 10
+snmp-server logging threshold pdu-processing 10
+snmp-server trap-source MgmtEth0/RP0/CPU0/0
+ntp
+ server 10.122.1.1
+!
+call-home
+ service active
+ contact smart-licensing
+ profile CiscoTAC-1
+  active
+  destination transport-method email disable
+  destination transport-method http
+ !
+!
+netconf-yang agent
+ ssh
+!
+hw-module location 0/0
+ mxponder
+  trunk-rate 300G
+  client-rate OTU4
+ !
+!
+hw-module location 0/1
+ mxponder
+  trunk-rate 300G
+  client-rate 100GE
+ !
+!
+interface MgmtEth0/RP0/CPU0/0
+ ipv4 address 10.104.153.13 255.255.255.0
+!
+interface MgmtEth0/RP0/CPU0/1
+ bridge-port routed-interface MgmtEth0/RP0/CPU0/0
+!
+interface MgmtEth0/RP0/CPU0/2
+ shutdown
+!
+controller Optics0/0/0/0
+ description Scenario-1** Connected to NCS2006-B-2-1-9
+ bits-per-symbol 3.4375
+ rx-low-threshold -220
+ logging events link-status
+!
+controller Optics0/0/0/1
+ description Scr1-Prot
+ cd-max 5
+ bits-per-symbol 3.4375
+ cd-high-threshold 5
+ rx-low-threshold -220
+ dgd-high-threshold 200
+ osnr-low-threshold 3800
+ logging events link-status
+!
+controller Optics0/0/0/2
+ description ** Connected to NCS4K-B 0/1/0/1 **
+ rx-low-threshold -110
+ logging events link-status
+!
+controller Optics0/0/0/3
+ description Router-P4 0/0/0/11
+ rx-high-threshold 48
+ logging events link-status
+!
+controller Optics0/0/0/4
+ description Router-P3 0/0/0/13
+ rx-low-threshold -110
+!
+controller Optics0/0/0/5
+ description ** Connected to NCS4K-B 0/3/0/1**
+ logging events link-status
+!
+controller Optics0/0/0/6
+ description Router-P4 0/0/0/12
+ logging events link-status
+!
+controller Optics0/1/0/0
+ description Scr2-Work(Connecting to NCS2K-NODE-B)
+ bits-per-symbol 3.4375
+ rx-voa fixed-ratio 1500
+ rx-low-threshold -220
+ logging events link-status
+!
+controller Optics0/1/0/1
+ description Scr2-Prot(Connecting to NCS2K-NODE-B)
+ bits-per-symbol 3.4375
+ rx-low-threshold -220
+ logging events link-status
+!
+controller Optics0/1/0/2
+ description ** Connected to NCS4K-B 0/2/0/1 **
+ rx-low-threshold -88
+ logging events link-status
+!
+controller Optics0/1/0/3
+ description ** Connected to NCS4K-B 0/1/0/6 **
+ rx-low-threshold -88
+ logging events link-status
+!
+controller Optics0/1/0/4
+ description NCS4K-B--0/6/0/5
+ rx-low-threshold -88
+!
+controller Optics0/1/0/5
+ description ** Connected to NCS4K-B 0/2/0/6 **
+ rx-low-threshold -88
+ logging events link-status
+!
+controller Optics0/1/0/6
+ description ** Connected to NCS4K-B 0/3/0/6 **
+ rx-low-threshold -88
+ logging events link-status
+!
+controller Optics0/1/0/7
+ description NCS4K-B--0/1/0/5
+ rx-low-threshold -88
+!
+controller CoherentDSP0/0/0/0
+ pm 15-min fec report Q min-tca enable
+ pm 15-min fec report Q-margin min-tca enable
+ pm 15-min fec threshold Q min 1200
+ pm 15-min fec threshold Q-margin min 700
+!
+router static
+ address-family ipv4 unicast
+  0.0.0.0/0 MgmtEth0/RP0/CPU0/0 10.104.153.1
+  10.230.211.2/32 10.104.153.150
+ !
+!
+snmp-server traps isis all
+snmp-server traps ospfv3 errors bad-packet
+snmp-server traps ospfv3 errors config-error
+snmp-server traps ospfv3 errors virt-bad-packet
+snmp-server traps ospfv3 state-change if-state-change
+snmp-server traps ospfv3 state-change neighbor-state-change
+snmp-server traps ospfv3 state-change virtif-state-change
+snmp-server traps ospfv3 state-change virtneighbor-state-change
+snmp-server traps ospfv3 state-change restart-status-change
+snmp-server traps ospfv3 state-change restart-virtual-helper-status-change
+snmp-server traps bgp cbgp2
+snmp-server traps bgp
+snmp-server traps vpls all
+snmp-server traps vpls status
+snmp-server traps vpls full-clear
+snmp-server traps vpls full-raise
+snmp-server traps l2vpn all
+snmp-server traps l2vpn vc-up
+snmp-server traps l2vpn vc-down
+snmp-server traps mpls traffic-eng up
+snmp-server traps mpls traffic-eng down
+snmp-server traps mpls traffic-eng reroute
+snmp-server traps mpls traffic-eng reoptimize
+snmp-server traps mpls frr all
+snmp-server traps mpls frr protected
+snmp-server traps mpls frr unprotected
+snmp-server traps mpls ldp up
+snmp-server traps mpls ldp down
+snmp-server traps mpls ldp threshold
+snmp-server traps mpls traffic-eng p2mp up
+snmp-server traps mpls traffic-eng p2mp down
+snmp-server traps rsvp all
+snmp-server traps rsvp new-flow
+snmp-server traps rsvp lost-flow
+snmp-server traps mpls l3vpn all
+snmp-server traps mpls l3vpn vrf-up
+snmp-server traps mpls l3vpn vrf-down
+snmp-server traps mpls l3vpn max-threshold-cleared
+snmp-server traps mpls l3vpn max-threshold-exceeded
+snmp-server traps mpls l3vpn mid-threshold-exceeded
+snmp-server traps mpls l3vpn max-threshold-reissue-notif-time 1
+lmp
+ gmpls optical-uni
+  controller Optics0/0/0/0
+   neighbor 1010415314
+   neighbor flexi-grid-capable
+   neighbor interface-id unnumbered 2130707474
+   link-id ipv4 unnumbered
+  !
+  controller Optics0/0/0/1
+   neighbor 1010415314
+   neighbor flexi-grid-capable
+   neighbor interface-id unnumbered 2130708242
+   link-id ipv4 unnumbered
+  !
+  controller Optics0/1/0/0
+   neighbor 1010415314
+   neighbor flexi-grid-capable
+   neighbor interface-id unnumbered 2130707476
+   link-id ipv4 unnumbered
+  !
+  controller Optics0/1/0/1
+   neighbor 1010415314
+   neighbor flexi-grid-capable
+   neighbor interface-id unnumbered 2130708244
+   link-id ipv4 unnumbered
+  !
+  neighbor 1010415314
+   ipcc routed
+   router-id ipv4 unicast 10.104.153.14
+  !
+  router-id ipv4 unicast 10.104.153.13
+ !
+!
+rsvp
+ controller Optics0/0/0/0
+  signalling refresh out-of-band interval 86400
+  signalling refresh out-of-band missed 110000
+ !
+ controller Optics0/0/0/1
+  signalling refresh out-of-band interval 86400
+  signalling refresh out-of-band missed 110000
+ !
+ controller Optics0/1/0/0
+  signalling refresh out-of-band interval 86400
+  signalling refresh out-of-band missed 110000
+ !
+ controller Optics0/1/0/1
+  signalling refresh out-of-band interval 86400
+  signalling refresh out-of-band missed 110000
+ !
+!
+mpls traffic-eng
+ logging events all
+ gmpls optical-uni
+  controller Optics0/0/0/0
+  !
+  controller Optics0/0/0/1
+  !
+  controller Optics0/1/0/0
+  !
+  controller Optics0/1/0/1
+  !
+ !
+!
+xml agent tty
+!
+snmp-server traps sensor
+snmp-server traps fru-ctrl
+netconf agent tty
+!
+snmp-server traps ospf lsa lsa-maxage
+snmp-server traps ospf lsa lsa-originate
+snmp-server traps ospf errors bad-packet
+snmp-server traps ospf errors authentication-failure
+snmp-server traps ospf errors config-error
+snmp-server traps ospf errors virt-bad-packet
+snmp-server traps ospf errors virt-authentication-failure
+snmp-server traps ospf errors virt-config-error
+snmp-server traps ospf retransmit packets
+snmp-server traps ospf retransmit virt-packets
+snmp-server traps ospf state-change if-state-change
+snmp-server traps ospf state-change neighbor-state-change
+snmp-server traps ospf state-change virtif-state-change
+snmp-server traps ospf state-change virtneighbor-state-change
+snmp-server traps pki
+snmp-server traps ipsec tunnel stop
+snmp-server traps ipsec tunnel start
+snmp-server traps isakmp tunnel stop
+snmp-server traps isakmp tunnel start
+ssh server rate-limit 600
+ssh server v2
+ssh server netconf vrf default
+telnet vrf default ipv4 server max-servers 5
+snmp-server traps ipsla
+end
+
+
+Command: show process cRu 
+Output:
+
+Sat Jul 12 07:38:16.591 UTC
+No such process cRu
+
+Command: show alarms brief system active 
+Output:
+
+Sat Jul 12 07:38:17.415 UTC
+
+------------------------------------------------------------------------------------
+Active Alarms 
+------------------------------------------------------------------------------------
+Location        Severity     Group            Set Time                   Description                                                                                                                                                                                                                                                
+------------------------------------------------------------------------------------
+0/0             Critical     Controller       12/28/2024 12:16:48 UTC    Optics0/0/0/6 - Improper Removal                                                                                                                                                                                                                           
+0/0             Critical     Controller       12/28/2024 12:16:48 UTC    Optics0/0/0/4 - Improper Removal                                                                                                                                                                                                                           
+0/0             Critical     Controller       12/28/2024 12:16:48 UTC    Optics0/0/0/3 - Improper Removal                                                                                                                                                                                                                           
+0/0             Critical     OTN              12/28/2024 12:16:50 UTC    OTU40/0/0/7 - Incoming Payload Signal Absent                                                                                                                                                                                                               
+0/1             Critical     OTN              12/28/2024 12:16:55 UTC    CoherentDSP0/1/0/0 - Incoming Payload Signal Absent                                                                                                                                                                                                        
+0/1             Major        Ethernet         12/28/2024 12:16:55 UTC    HundredGigECtrlr0/1/0/2 - Carrier Loss On The LAN                                                                                                                                                                                                          
+0/1             Major        Ethernet         12/28/2024 12:16:55 UTC    HundredGigECtrlr0/1/0/4 - Carrier Loss On The LAN                                                                                                                                                                                                          
+0/1             Major        Ethernet         12/28/2024 12:16:55 UTC    HundredGigECtrlr0/1/0/5 - Carrier Loss On The LAN                                                                                                                                                                                                          
+0/1             Major        Ethernet         12/28/2024 12:16:55 UTC    HundredGigECtrlr0/1/0/7 - Carrier Loss On The LAN                                                                                                                                                                                                          
+0/0             Minor        Controller       04/23/2025 15:32:30 UTC    Optics0/0/0/1 - Optics Low Signal To Noise Ratio                                                                                                                                                                                                           
+0/0             Minor        Controller       04/23/2025 15:32:31 UTC    Optics0/0/0/1 - Optics Out of Range Chromatic Dispersion                                                                                                                                                                                                   
+0/0             NotReported  OTN              04/23/2025 15:32:30 UTC    ODU40/0/0/1/2 - Path Monitoring Backward Defect Monitoring                                                                                                                                                                                                 
+0/0             NotReported  OTN              04/23/2025 15:32:30 UTC    ODU40/0/0/1/3 - Path Monitoring Backward Defect Monitoring                                                                                                                                                                                                 
+0/1             NotReported  OTN              12/28/2024 12:16:55 UTC    ODU40/1/0/1/3 - Path Monitoring Alarm Indication Signal                                                                                                                                                                                                    
+0/1             NotAlarmed   OTN              04/23/2025 15:33:29 UTC    ODU40/1/0/1/1 - OPUK Client Signal Failure                                                                                                                                                                                                                 
+0/1             NotAlarmed   OTN              04/23/2025 15:33:29 UTC    ODU40/1/0/1/2 - OPUK Client Signal Failure                                                                                                                                                                                                                 
+0/0             NotReported  OTN              12/28/2024 12:16:50 UTC    ODU40/0/0/0/3 - Path Monitoring Alarm Indication Signal                                                                                                                                                                                                    
+0/0             NotReported  OTN              04/23/2025 15:33:42 UTC    ODU40/0/0/0/2 - Path Monitoring Backward Defect Monitoring                                                                                                                                                                                                 
+0/0             Minor        Controller       04/29/2025 16:30:36 UTC    Optics0/0/0/1 - Optics High Differential Group Delay                                                                                                                                                                                                       
+0/1             Major        Ethernet         06/25/2025 06:41:40 UTC    HundredGigECtrlr0/1/0/3 - Remote Fault                                                                                                                                                                                                                     
+0/1             Major        Ethernet         06/25/2025 06:41:40 UTC    HundredGigECtrlr0/1/0/6 - Remote Fault                                                                                                                                                                                                                     
+
+Command: show platform 
+Output:
+
+Sat Jul 12 07:38:20.010 UTC
+Node              Type                       State             Config state
+--------------------------------------------------------------------------------
+0/0               NCS1K4-1.2T-K9             OPERATIONAL       NSHUT
+0/1               NCS1K4-1.2T-K9             OPERATIONAL       NSHUT
+0/2               NCS1K4-LC-FILLER           PRESENT           NSHUT
+0/3               NCS1K4-LC-FILLER           PRESENT           NSHUT
+0/RP0/CPU0        NCS1K4-CNTLR-K9(Active)    IOS XR RUN        NSHUT
+0/FT0             NCS1K4-FAN                 OPERATIONAL       NSHUT
+0/FT1             NCS1K4-FAN                 OPERATIONAL       NSHUT
+0/FT2             NCS1K4-FAN                 OPERATIONAL       NSHUT
+0/PM0             NCS1K4-AC-PSU              OPERATIONAL       NSHUT
+0/PM1             NCS1K4-AC-PSU              OPERATIONAL       NSHUT
+0/SC0             NCS1004                    OPERATIONAL       NSHUT
+
+Command: show filesystem 
+Output:
+
+Sat Jul 12 07:38:21.706 UTC
+File Systems:
+
+      Size(b)      Free(b)        Type  Flags  Prefixes
+   1023303680    992948224       flash     rw  /misc/config
+            0            0     network     rw  ftp:
+   3103539200   1239330816    harddisk     rw  harddisk:
+  25061363712  24666804224  flash-disk     rw  apphost:
+            0            0     network     rw  tftp:
+   1040076800   1032740864  flash-disk     rw  disk0:
+
+Command: show media location all 
+Output:
+
+Sat Jul 12 07:38:22.400 UTC
+
+Media Info for Location: node0_RP0_CPU0
+Partition                            Size     Used  Percent    Avail
+--------------------------------------------------------------------
+rootfs:                              3.9G     1.3G      35%     2.4G
+apphost:                              24G     377M       2%      22G
+/dev/sde                             2.0G     429M      24%     1.4G
+harddisk:                            2.9G     1.8G      64%    1013M
+log:                                 2.9G     161M       6%     2.6G
+config:                              976M      29M       4%     880M
+disk0:                               992M     7.0M       1%     918M
+/cpu-dr-backup                       9.3G     1.4G      16%     7.5G
+/misc/disk2                          9.3G      22M       1%     8.8G
+/mb-dr-backup                         24G     629M       3%      22G
+
+Command: show hw-module fpd
+Output:
+
+Sat Jul 12 07:38:23.055 UTC
+
+Auto-upgrade:Disabled
+                                                                         FPD Versions
+                                                                        ==============
+Location   Card type             HWver FPD device       ATR Status    Running   Programd  
+-----------------------------------------------------------------------------------------
+0/0        NCS1K4-1.2T-K9        2.0   LC_CPU_MOD_FW        CURRENT    77.10     77.10    
+0/0        NCS1K4-1.2T-K9        1.0   LC_OPT_MOD_FW        CURRENT     1.36      1.36    
+0/1        NCS1K4-1.2T-K9        3.0   LC_CPU_MOD_FW        CURRENT    77.10     77.10    
+0/1        NCS1K4-1.2T-K9        3.0   LC_OPT_MOD_FW        CURRENT     1.36      1.36    
+0/RP0      NCS1K4-CNTLR-K9       5.0   CSB_IMG           S  CURRENT     0.200     0.200   
+0/RP0      NCS1K4-CNTLR-K9       5.0   TAM_FW               CURRENT    36.08     36.08    
+0/RP0      NCS1K4-CNTLR-K9       1.14  BIOS              S  CURRENT     5.80      5.80    
+0/RP0      NCS1K4-CNTLR-K9       5.4   BP_SSD               CURRENT    75.00     75.00    
+0/RP0      NCS1K4-CNTLR-K9       5.0   CPU_FPGA             CURRENT     1.14      1.14    
+0/RP0      NCS1K4-CNTLR-K9       5.4   CPU_SSD              CURRENT    75.00     75.00    
+0/RP0      NCS1K4-CNTLR-K9       3.18  POWMAN_CFG           CURRENT     3.40      3.40    
+0/PM0      NCS1K4-AC-PSU         0.1   PO-PriMCU            CURRENT     2.70      2.70    
+0/PM1      NCS1K4-AC-PSU         0.1   PO-PriMCU            CURRENT     2.70      2.70    
+0/SC0      NCS1004               2.0   BP_FPGA              CURRENT     1.25      1.25    
+0/SC0      NCS1004               2.0   XGE_FLASH            CURRENT    18.04     18.04    
+
